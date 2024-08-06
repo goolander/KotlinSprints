@@ -14,7 +14,4 @@ fun main() {
     all_employee = 1999
 
     println(all_employee)
-
-
-
 }
