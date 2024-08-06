@@ -12,6 +12,5 @@ fun main() {
 // println(all_employee)
 
     all_employee = 1999
-
     println(all_employee)
 }
