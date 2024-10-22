@@ -6,7 +6,7 @@ fun main() {
    var markStudent3 = 3
    var markStudent4 = 5
    var allStudents = 4
-   var averageMark: Float = (((markStudent1+markStudent2+markStudent3+markStudent4)
-           /allStudents).toFloat())
+   var averageMark: Float = (((markStudent1 + markStudent2 + markStudent3 + markStudent4)
+           / allStudents).toFloat())
     println((String.format("%.2f", averageMark)))
 }
