@@ -4,7 +4,7 @@ fun main() {
     var startPosition: String = "E2"
     var endPosition: String = "E4"
     var countPosition: Short = 1
-    val dataPosition = { "[$startPosition-$endPosition; $countPosition]" }
+    val dataPosition = {"[$startPosition-$endPosition; $countPosition]"}
     println(dataPosition())
     startPosition = "D2"
     endPosition = "D3"
