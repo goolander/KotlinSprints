@@ -10,5 +10,4 @@ fun main() {
     endPosition = "D3"
     countPosition = 2
     println(dataPosition())
-
 }
