@@ -6,12 +6,35 @@ class Book(
     val title: String,
     val price: Int,
     val author: String
-)
+) : Comparable<Book> {
 
-class BookNotFoundException(title: String): Exception("Книга с названием '$title' не найдена")
+    override fun compareTo(other: Book): Int {
+        // 16.1 Сортировка по названию (по алфавиту)
+        val titleCompare = this.title.compareTo(other.title)
+        if (titleCompare != 0) return titleCompare
+
+        // 16.2 Если названия одинаковые, сортируем по автору (по алфавиту)
+        val authorCompare = this.author.compareTo(other.author)
+        if (authorCompare != 0) return authorCompare
+
+        // 16.3 Сортируем по цене (от большей к меньшей: 200 -> 1 сравниваем other с this)
+        return other.price.compareTo(this.price)
+    }
+
+    override fun toString(): String {
+        return "Book(title='$title', author='$author', price=$price)"
+    }
+}
+
+class BookNotFoundException(maxPrice: Int, title: String, authorName: String) :
+    Exception("Книга '$title' автора $authorName с ценой до $maxPrice не найдена в библиотеке")
 
 class Library {
     val books: MutableList<Book> = mutableListOf()
+
+    val sortedBooks: List<Book>
+        get() = books.sorted()
+
     private val authorNames = listOf(
         "Лев Толстой", "Фёдор Достоевский", "Антон Чехов", "Александр Пушкин", "Николай Гоголь",
         "Иван Тургенев", "Михаил Булгаков", "Борис Пастернак", "Александр Солженицын", "Анна Ахматова",
@@ -63,16 +86,15 @@ class Library {
         maxPrice: Int,
         title: String,
         authorName: String
-    ){
+    ): Book {
         for (book in books) {
         if ((book.price <= maxPrice) && (book.title == title) && (book.author == authorName))
             {
                 println("Найдена книга: ${book.title}, автор ${book.author}, цена ${book.price}")
-                return
+                return book
             }
     }
-        throw BookNotFoundException(title)
-        println("Конец программы")
+        throw BookNotFoundException(maxPrice, title, authorName)
     }
     fun getRandomBook(): Book {
         val randomPrice = Random.nextInt(1, 201)
